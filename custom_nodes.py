@@ -33,52 +33,17 @@ class node():
         return str(self.name)
     def __repr__(self):
         return str(self.name)
-    def set_name(self, obj):
-        self.name = obj
-    def set_freq(self, obj):
-        self.freq = obj
     def get_freq(self):
         return int(self.freq) 
     def get_root(self):
         if self.parent != None:
             return self.parent.get_root()
-        return self
-    
-    def set_left_child(self, obj):
-        try:
-            obj = obj.get_root()
-        except:
-            pass
-        try:
-            node.COMPONENTS.remove(obj)
-        except ValueError:
-            pass
-        self.left_child = obj
-        obj.parent = self
-    def set_right_child(self,obj):
-        try:
-            obj = obj.get_root()
-        except:
-            pass
-        try:
-            node.COMPONENTS.remove(obj)
-        except ValueError:
-            pass
-        self.right_child = obj
-        obj.parent = self
-
+        return self        
     def merge(self, other):
         lhs = self.get_root()
         rhs = other.get_root()
         MT = node(None, lhs, str(lhs)+str(rhs), rhs, lhs.get_freq()+rhs.get_freq())
         return MT
-
-    # def get_depth(self):
-        # i = 0
-        # while self.parent != None:
-        #     i+=1
-        #     self = self.parent
-        # return i
     def generate_bits(self):    #self needs to be a root
         try:
             self.left_child.binary_seq = self.binary_seq + "0"
@@ -98,3 +63,13 @@ class node():
             pass
         if len(self.name) == 1:
             node.NAME_TO_BITS[str(self.name)] = self.binary_seq
+    def clean_all():
+        for k in node.NAME_TO_OBJ:
+            del(k)
+        for n in node.COMPONENTS:
+            del(n)
+        for k in node.NAME_TO_BITS:
+            del(k)
+        node.NAME_TO_BITS = {}
+        node.NAME_TO_OBJ = {}
+        node.COMPONENTS = []

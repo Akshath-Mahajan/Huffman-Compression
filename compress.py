@@ -21,7 +21,6 @@ def _to_Bytes(data):
   return bytes(b)
  
 def Huffman_Tree(components): #COMPONENTS IS LIST OF OBJS, RETURNS ROOT ONLY
-    #Error in abc.txt
     if len(components) == 2:
         if components[0].freq < components[1].freq:
             components[0],components[1] = components[1], components[0]
@@ -40,7 +39,6 @@ def Huffman_Tree(components): #COMPONENTS IS LIST OF OBJS, RETURNS ROOT ONLY
                 if node.freq < min2 and node.freq > min1:
                     b = node
                     min2 = node.freq
-        
         b.merge(a)
         return Huffman_Tree(components)
         
@@ -68,9 +66,14 @@ def compress(filename):
     t = ''.join(chars)
     temp = {k:v for k,v in node.NAME_TO_BITS.items() if len(k) <= 1}
     outputfile = filename[0: filename.index('.')] + '.bin'
-    f = open(outputfile, 'wb')
+    print(t)
+    f = open(outputfile, 'w')
+    f.write(str(len(t))+"\n")
+    f.write(str(temp)+"\n")
+    f.close()
+    f = open(outputfile, 'ab')
     f.write(_to_Bytes(t))
     f.close()
-    f = open(outputfile, 'a')
-    f.write(str(temp))
-    f.close()
+    node.clean_all()
+    #For test sake, test pickle and text dict storage.
+compress('Tests/aabc.txt')
