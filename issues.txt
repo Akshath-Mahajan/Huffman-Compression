@@ -18,3 +18,9 @@ Slow Decompression
 
 Bad implementation Of custom nodes:
     The custom nodes datastructure can be implemented more optimally and simplistically if the above solutions don't speed up the program
+
+Storage of key:
+    The keys are being stored at the top of the compressed file as a string, which takes up a lot more space. Sometimes even more than the 
+    size of the compressed (or even original) file itself.
+    
+    Potential Solution: Unknown (Yet)
