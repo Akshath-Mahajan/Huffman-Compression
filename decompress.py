@@ -90,3 +90,4 @@ def decompress(filename):
     fh = open(filename[:filename.index('.')]+".txt", 'w')
     fh.write(output)
     fh.close()
+    node.clean_all()

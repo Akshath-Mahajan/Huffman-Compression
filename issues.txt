@@ -1,32 +1,5 @@
 Problems noticed after completion.
-
-Edit 1:
-Slow Compression
-    Reason: O(n^2) time for huffman tree generation
-    Potential Solutions: 
-        Use heap data structure to get minimum for each merge while generating huffman tree. (Results in final O(nlogn) time)
-        Pre-sort to get minimum for each merge while generating huffman tree. (Results in O(nlogn) time as well)
-
-Slow Decompression
-    Reason: Unknown
-    Potential Reasons:
-        a) Decoding method is slow (O(n) time, where n is length of sequence)
-            Solution: Use O(logn) implementation for decoding
-        b) Generating Huffman tree from the stored key (dictionary) is slow.
-            Solution: i)    Use dict directly for decoding to avoid generating huffman tree
-                      ii)   Store the objects rather than dictionary in compressed file to avoid generating huffman tree
-                      iii)  Use bitarray for Compression as well as Decompression
-Bad implementation Of custom nodes:
-    The custom nodes datastructure can be implemented more optimally and simplistically if the above solutions don't speed up the program
-
-Storage of key:
-    The keys are being stored at the top of the compressed file as a string, which takes up a lot more space. Sometimes even more than the 
-    size of the compressed (or even original) file itself.
-    
-    Potential Solution: Unknown (Yet)
-
-
-Edit 2:
+Edit 3:
 Slow Compression
     Reason: O(n^2) time for huffman tree generation
     Potential Solutions: 
@@ -45,3 +18,9 @@ Storage of key:
     size of the compressed (or even original) file itself.
     
     Potential Solution: Unknown (Yet)
+
+Driver Program:
+    The file core.py contains the driver program for the huffman compression engine.
+    Sys module could have been used to provide a cleaner, one line executable program, but the goal is to avoid any dependencies,
+    even the sys module.
+    The code is now self-contained, but has a childish driver when executing.
