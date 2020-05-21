@@ -66,7 +66,6 @@ def compress(filename):
     t = ''.join(chars)
     temp = {k:v for k,v in node.NAME_TO_BITS.items() if len(k) <= 1}
     outputfile = filename[0: filename.index('.')] + '.bin'
-    print(t)
     f = open(outputfile, 'w')
     f.write(str(len(t))+"\n")
     f.write(str(temp)+"\n")
@@ -76,4 +75,4 @@ def compress(filename):
     f.close()
     node.clean_all()
     #For test sake, test pickle and text dict storage.
-compress('Tests/aabc.txt')
+compress('Tests/bible.txt')
