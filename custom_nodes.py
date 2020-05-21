@@ -98,3 +98,14 @@ class node():
             pass
         if len(self.name) == 1:
             node.NAME_TO_BITS[str(self.name)] = self.binary_seq
+    
+    def clean_all():
+        for k in node.NAME_TO_OBJ:
+            del(k)
+        for n in node.COMPONENTS:
+            del(n)
+        for k in node.NAME_TO_BITS:
+            del(k)
+        node.NAME_TO_BITS = {}
+        node.NAME_TO_OBJ = {}
+        node.COMPONENTS = []

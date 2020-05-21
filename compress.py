@@ -67,3 +67,4 @@ def compress(filename):
     f = open(outputfile, 'ab')
     f.write(to_bytes(t))
     f.close()
+    node.clean_all()
