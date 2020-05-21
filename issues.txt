@@ -1,0 +1,20 @@
+Problems noticed after completion.
+
+Edit 1:
+Slow Compression
+    Reason: O(n^2) time for huffman tree generation
+    Potential Solutions: 
+        Use heap data structure to get minimum for each merge while generating huffman tree. (Results in final O(nlogn) time)
+        Pre-sort to get minimum for each merge while generating huffman tree. (Results in O(nlogn) time as well)
+
+Slow Decompression
+    Reason: Unknown
+    Potential Reasons:
+        a) Decoding method is slow (O(n) time, where n is length of sequence)
+            Solution: Use O(logn) implementation for decoding
+        b) Generating Huffman tree from the stored key (dictionary) is slow.
+            Solution: i)    Use dict directly for decoding to avoid generating huffman tree
+                      ii)   Store the objects rather than dictionary in compressed file to avoid generating huffman tree
+
+Bad implementation Of custom nodes:
+    The custom nodes datastructure can be implemented more optimally and simplistically if the above solutions don't speed up the program
