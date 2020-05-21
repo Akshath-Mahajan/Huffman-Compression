@@ -15,7 +15,7 @@ Slow Decompression
         b) Generating Huffman tree from the stored key (dictionary) is slow.
             Solution: i)    Use dict directly for decoding to avoid generating huffman tree
                       ii)   Store the objects rather than dictionary in compressed file to avoid generating huffman tree
-
+                      iii)  Use bitarray for Compression as well as Decompression
 Bad implementation Of custom nodes:
     The custom nodes datastructure can be implemented more optimally and simplistically if the above solutions don't speed up the program
 
