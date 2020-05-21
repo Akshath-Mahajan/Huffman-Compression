@@ -1,5 +1,11 @@
 from custom_nodes import node
 
+def to_bytes(data):
+  b = bytearray()
+  for i in range(0, len(data), 8):
+    b.append(int(data[i:i+8], 2))
+  return bytes(b) 
+
 def get_freq_dict(filename):
     fh = open(filename, 'r')
     all_text = fh.read()
@@ -10,16 +16,8 @@ def get_freq_dict(filename):
             char_freq[char]+=1
         except KeyError:
             char_freq[char] = 1
-    
-    # res = {k: v for k, v in sorted(char_freq.items(), key=lambda item: item[1])}
     return char_freq
 
-def _to_Bytes(data):
-  b = bytearray()
-  for i in range(0, len(data), 8):
-    b.append(int(data[i:i+8], 2))
-  return bytes(b)
- 
 def Huffman_Tree(components): #COMPONENTS IS LIST OF OBJS, RETURNS ROOT ONLY
     if len(components) == 2:
         if components[0].freq < components[1].freq:
@@ -42,25 +40,21 @@ def Huffman_Tree(components): #COMPONENTS IS LIST OF OBJS, RETURNS ROOT ONLY
         b.merge(a)
         return Huffman_Tree(components)
         
-def generate_nodes(filename):
-    freq_table = get_freq_dict(filename)
+def generate_nodes(freq_table):
     nodes = []
     for i in freq_table.keys():
         temp = node(None, None, i, None, freq_table[i])
-    
-def get_huffman_bits(filename):
-    generate_nodes(filename)    #Generate node.components
-    t = Huffman_Tree(node.COMPONENTS)   #t is now the root of huffman tree
-    t.generate_bits()                   
-    return node.NAME_TO_BITS
+                    
 
 def compress(filename):
-    get_huffman_bits(filename)
+    ft = get_freq_dict(filename)
+    generate_nodes(ft)
+    t = Huffman_Tree(node.COMPONENTS)   #t is now the root of huffman tree
+    t.generate_bits()   
     fh = open(filename, 'r')
     l = fh.read()
     fh.close()
     chars = [x for x in l]
-   
     for i in range(len(chars)):
         chars[i] = node.NAME_TO_BITS[chars[i]]
     t = ''.join(chars)
@@ -71,8 +65,5 @@ def compress(filename):
     f.write(str(temp)+"\n")
     f.close()
     f = open(outputfile, 'ab')
-    f.write(_to_Bytes(t))
+    f.write(to_bytes(t))
     f.close()
-    node.clean_all()
-    #For test sake, test pickle and text dict storage.
-compress('Tests/bible.txt')
