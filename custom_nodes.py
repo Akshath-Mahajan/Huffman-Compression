@@ -33,6 +33,11 @@ class node():
         return str(self.name)
     def __repr__(self):
         return str(self.name)
+    def __lt__(self, other):
+        return self.freq < other.freq
+    def __gt__(self, other):
+        return self.freq > other.freq
+        
     def set_name(self, obj):
         self.name = obj
     def set_freq(self, obj):
@@ -98,14 +103,11 @@ class node():
             pass
         if len(self.name) == 1:
             node.NAME_TO_BITS[str(self.name)] = self.binary_seq
-    
+            
     def clean_all():
-        for k in node.NAME_TO_OBJ:
-            del(k)
-        for n in node.COMPONENTS:
-            del(n)
-        for k in node.NAME_TO_BITS:
-            del(k)
+        for k,v in node.NAME_TO_OBJ.items():
+            del(v)
+        node.COMPONENTS = []
         node.NAME_TO_BITS = {}
         node.NAME_TO_OBJ = {}
-        node.COMPONENTS = []
+        

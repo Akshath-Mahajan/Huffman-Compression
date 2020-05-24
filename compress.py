@@ -1,5 +1,5 @@
 from custom_nodes import node
-
+from heaps import minHeap
 def to_bytes(data):
   b = bytearray()
   for i in range(0, len(data), 8):
@@ -17,28 +17,24 @@ def get_freq_dict(filename):
         except KeyError:
             char_freq[char] = 1
     return char_freq
-
-def Huffman_Tree(components): #COMPONENTS IS LIST OF OBJS, RETURNS ROOT ONLY
+def get_heap(components):
+    H = minHeap()
+    for i in node.COMPONENTS:
+        H.insert(i)
+    return H
+    
+def Huffman_Tree(components, heap): #COMPONENTS IS LIST OF OBJS, RETURNS ROOT ONLY
     if len(components) == 2:
         if components[0].freq < components[1].freq:
             components[0],components[1] = components[1], components[0]
         
         return components[0].merge(components[1])
     else:
-        a = None
-        b = None
-        min1 = float('inf')
-        min2 = float('inf')
-        for node in components:
-            if node.freq <= min1:
-                a,b = node, a
-                min1, min2 = node.freq, min1
-            else:
-                if node.freq < min2 and node.freq > min1:
-                    b = node
-                    min2 = node.freq
-        b.merge(a)
-        return Huffman_Tree(components)
+        a = heap.extract_min()
+        b = heap.extract_min()
+        merger = b.merge(a)
+        heap.insert(merger)
+        return Huffman_Tree(components, heap)
         
 def generate_nodes(freq_table):
     nodes = []
@@ -49,7 +45,8 @@ def generate_nodes(freq_table):
 def compress(filename):
     ft = get_freq_dict(filename)
     generate_nodes(ft)
-    t = Huffman_Tree(node.COMPONENTS)   #t is now the root of huffman tree
+    heap = get_heap(node.COMPONENTS)
+    t = Huffman_Tree(node.COMPONENTS, heap)   #t is now the root of huffman tree
     t.generate_bits()   
     fh = open(filename, 'r')
     l = fh.read()
