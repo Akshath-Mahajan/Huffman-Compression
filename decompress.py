@@ -8,6 +8,7 @@ def read_file(filename):
     non_bin_data = fh.readline()
     mapping = eval(non_bin_data.decode('utf-8'))
     bin_data_read = fh.read()
+    fh.close()
     temp = [bin(t)[2:].rjust(8, '0') for t in list(bin_data_read)]
     lengthofreadbits = 0
     for i in temp:
