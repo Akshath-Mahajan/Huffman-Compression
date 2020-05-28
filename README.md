@@ -7,6 +7,7 @@ This program can compress text files on your device to enable easier storage and
 # How to use it
 The process has a driver program inbuilt, and executing the core.py module should start it
 There are two operations to choose from:
+
 				a) Compression [To compress a given file]
 				b) Decompression [To decompress a compressed file]
 				
