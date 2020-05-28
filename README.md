@@ -5,7 +5,8 @@ This project represents understanding and implementation of a Compression Engine
 This program can compress text files on your device to enable easier storage and transmission of the file
 
 # How to use it
-The process has a driver program inbuilt, and executing the core.py module should start it
+The process has a driver program inbuilt, and executing the core.py module should start it.
+
 There are two operations to choose from:
 
 				a) Compression [To compress a given file]
