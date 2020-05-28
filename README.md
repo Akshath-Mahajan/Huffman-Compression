@@ -1,6 +1,5 @@
 # Huffman-Compression
-This project represents understanding and implementation of a Compression Engine based on compressing textual data using the Huffman algorithm
-
+This project represents the understanding and implementation of the Huffman algorithm by making an actual Text Compression Engine based on the algorithm
 # What it does?
 This program can compress text files on your device to enable easier storage and transmission of the file
 
